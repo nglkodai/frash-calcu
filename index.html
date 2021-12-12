@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8">
+    <title>Flash mental arithmetic</title>
+    <link rel="stylesheet" type="text/css" href="style.css" media="all">
+  </head>
+  <body>
+    <div class="background">
+      <!--- スタート画面 --->
+      <div class="background-start">
+        <div class="window-start">
+          <!--- 茶色要素 --->
+          <div class="Box">
+            <!--- タイトル --->
+            <div class="subject"><img src="images/subject.png"></div>
+            <!--- オプション --->
+            <div class="option-space">
+              <form id="js-difficulty">
+                <div class="option1">
+                  <input type="radio" name="difficulty" value="1" class="radio-btn" id="option1">
+                  <label>
+                    <img src="images/EASY.png" width=50% for="option1">
+                  </label>
+                </div>
+                <div class="option2">
+                  <lavel>
+                    <input type="radio" name="difficulty" value="2" class="radio-btn">
+                    <img src="images/NORMAL.png" width=80%>
+                  </lavel> 
+                </div>
+                <div class="option3">
+                  <lavel>
+                    <input type="radio" name="difficulty" value="3"  class="radio-btn">
+                    <img src="images/HARD.png" width=50%>
+                  </lavel>   
+                </div>
+              </form>
+            </div>
+            <!--- エンターキー押して --->
+            <div class="text-start">
+              <img src="images/PRESS.png" width=30%>
+              <div class="emptiness"></div>
+              <div class="Key-Enter">return</div>
+              <div class="emptiness"></div>
+              <img src="images/TO.png" width=12%>
+              <div class="emptiness"></div>
+              <img src="images/START.png" width=30%>
+            </div>
+          </div>
+        </div>
+      </div>
+          
+      <!--- 黒画面 --->
+      <div class="background-black">
+        <div class="element-black">
+          <div class="world-space">
+            <img src="images/WORLD.png" class="world">
+            <img src="images/EASY.png" class="easy">
+            <img src="images/NORMAL.png" class="normal">
+            <img src="images/HARD.png" class="hard">
+          </div>
+          <div class="small-mario-space">
+            <!---<img src="images/mario_run.png" width=20%>--->
+            <img src="images/mario-miono.png" width=20%>
+            <img src="images/%C3%97.png" class="life" width=5%>
+            <img src="images/1.png" class="life" width=5%>
+          </div>
+        </div>
+
+      </div>
+    
+      <!--- マリオ画像 --->
+      <div class="space-mario">
+        <img class="mario-run1" src="images/mario-miono.png" width="150" height="200">
+        <img class="mario-jump" src="images/mario_jump.PNG" width="150" height="200">
+      </div>
+      
+      <!--- プレイ画面 --->
+      <div class="window-play">
+        <!--- マリオBGM --->
+        <audio id="BGM" preload="auto" loop>
+          <source src="SE/BGM.mp3">
+        </audio>
+        <!--- はてなボックス --->
+        <div class="space-mario-box">
+          <img class="mario-box" src="images/mario-box.png" width=100%>
+          <img class="mario-box-emptiness" src="images/mario-box-emptiness.png" width=100%>
+          <audio id="CoinSound" preload="auto">
+            <source src="SE/coin.mp3" type="audio/mp3">
+          </audio>
+        </div>
+        <!--- 草 --->
+        <div class="grass">
+          <img src="images/grass.PNG">
+        </div>
+        <!--- 雲1 --->
+        <div class="cloud1">
+          <img src="images/cloud1.PNG">
+        </div>
+        <!--- 雲2 --->
+        <div class="cloud2">
+          <img src="images/cloud2.PNG">
+        </div> 
+        <!--- 3連ブロック --->
+        <div class="brick3">
+          <img src="images/3brick.png">
+        </div>
+        <!--- 階段 --->
+        <div class="stair">
+          <img src="images/stair.png">
+        </div>
+      
+        <!---問題スペース --->
+        <nav class="global-window">
+          <div class="Calcu-window" id="output"></div>
+        </nav>
+        <div class="loop" id="loop"></div>
+        <div class="Timer" id="Timer"></div>
+        
+        <!--- 回答入力画面 --->
+        <div class="answer-box">
+          <img src="images/wide-brick.png">
+          <input name="textBox" id="textBox" type="text" class="textBox" placeholder="回答を記入してください" autocomplete="off">
+        </div>
+        <audio id="Countdown" preload="auto">
+          <source src="SE/Countdown.mp3" type="audio/mp3">
+        </audio>
+      </div>
+  
+      <!--- 終了画面 --->
+      <div class="window-end">
+        <!---<img src="images/end-background.PNG">--->
+        <audio id="EndingSound" preload="auto">
+          <source src="SE/drumroll.mp3" type="audio/mp3">
+        </audio>
+        <div class="message">
+          <img src="images/great.png" class="GREATpic" height="150px" width="509px">
+          <audio id="CorrectSound" preload="auto">
+            <source src="SE/correct.mp3" type="audio/mp3">
+          </audio>
+          <img src="images/gameover.png" class="BADpic" height="150px" width
+                 737px>
+          <audio id="IncorrectSound" preload="auto">
+            <source src="SE/stupid.mp3" type="audio/mp3">
+          </audio>
+        </div>
+        <div class="output-space">
+          <img src="images/wide-brick.png">
+          <div class="output" id="OUTPUT"></div>
+        </div>
+      </div>
+      
+      <!--- トップリンク --->
+      <button class="link-top" id="TopLink">最初から</button>
+
+      <!--- credit --->
+      <div class="credit">製作：NIT 卒業展示</div>
+      <input class="under-credit" name="textbox" id="gomitext" type="text" autocomplete="off">
+    </div>
+    
+    <script type="text/javascript" src="javascript/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="javascript/script.js"></script>
+  </body>
+</html>

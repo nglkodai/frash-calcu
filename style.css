@@ -1,0 +1,963 @@
+@charset "UTF-8";
+/*** global ***/
+body{
+  margin: 0;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+}
+:root{
+  --base-time: 1.0s;
+  --base-delay: 3.5s;
+}
+
+/* 背景 */
+.background{
+  width: 100vw;
+  height: 100vh;
+  /*background-image: url(images/background.PNG);*/
+  background-image: url(images/background1.PNG);
+  background-position: center bottom;
+  background-repeat: repeat-x;
+}
+
+/***** スタート画面 *****/
+.background-start{
+  width: 100vw;
+  height: 100vh;
+  background-image: url(images/background.PNG);
+ /* background-image: url(images/background1.PNG);*/
+  background-position: center bottom;
+}
+.window-start{
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%);
+  bottom: 0;
+}
+.calcu-open .background-start{
+  animation-name: STARTWINDOWCLOSE;
+  animation-duration: 4s;
+}
+@keyframes STARTWINDOWCLOSE{
+  0%{opacity: 1;}
+  49%{opacity: 1;}
+  50%{opacity: 0;}
+  100%{opacity: 0;}
+}
+.countdown-close .background-start{
+  visibility: hidden;
+}
+
+/* 茶色要素 */
+.Box{
+  background-image: url(images/wide-brick.png);
+  background-size: cover;
+  position: fixed;
+  width: 700px;
+  height: 440px;
+  z-index: 1000;
+  top: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* タイトル */
+.subject{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+}
+
+/***** 難易度設定 *****/
+.option-space{
+  position: absolute;
+  bottom: 20px;
+  width: 660px;
+  height: 35px;
+  margin: auto;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.calcu-open .option-space{
+  visibility: hidden;
+}
+.option-space form{
+  display: flex;
+}
+.radio-btn{
+  position: relative;
+  bottom: 13px;
+}
+/* 難易度表示 */
+.option1{
+  width: 180px;
+  height: 100%;
+  margin-left: 40px;
+  visibility: ;
+}
+.option2{
+  width: 200px;
+  height: 100%;
+}
+.option3{
+  width: 180px;
+  height: 100%;
+  visibility: ;
+}
+
+/*** スタートメッセージ ***/
+.text-start{
+  width: 300px;
+  height: 22px;
+  position: absolute;
+  left: 50%;
+  bottom: -40px;
+  transform: translateX(-50%);
+  display: flex;
+  /***** 点滅用css *****/
+  -webkit-animation:Start 0.8s ease-in-out infinite alternate;
+  -moz-animation:Start 0.8s ease-in-out infinite alternate;
+  animation:Start 0.8s ease-in-out infinite alternate;
+}
+/* 点滅用 */
+@-webkit-keyframes Start{
+    0% {opacity:0;}
+    100% {opacity:1;}
+}
+@-moz-keyframes Start{
+    0% {opacity:0;}
+    100% {opacity:1;}
+}
+@keyframes Start{
+    0% {opacity:0;}
+    100% {opacity:1;}
+}
+.calcu-open .text-start{
+  visibility: hidden;
+}
+/* 空白 */
+.emptiness{
+  width: 10px;
+}
+/* エンターキーボタン */
+.Key-Enter{
+  width: 70px;
+  height: 22px;
+  font-size: 20px;
+  font-family: arial;
+  text-align: center;
+  background-color: #fff;
+  border: 1px solid #000;
+  border-bottom: 3px solid #000;
+  border-radius: 10px;
+}
+
+
+/***** 黒画面 *****/
+.background-black{
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #000;
+  z-index: 1100;
+  visibility: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 7000;
+}
+.calcu-open .background-black{
+  visibility: visible;
+  animation-name: CHANGESTART;
+  animation-duration: 4s;
+}
+@keyframes CHANGESTART{
+  0%{opacity: 0;}
+  20%{opacity: 1;}
+  50%{opacity: 1;}
+  70%{opacity: 0;}
+  100%{opacity: 0;}
+}
+.countdown-close .background-black{
+  animation-delay: 1s;
+  display: none;
+}
+
+/* WORLDと小マリオの親要素 */
+.element-black{
+  width: 400px;
+  height: 140px;
+  z-index: 1200;
+}
+/* WORLD */
+.world-space{
+  text-align: center;
+  width: 400px;
+  height: 70px;
+  display: flex;
+  visibility: hidden;
+}
+.calcu-open .world-space{
+  visibility: visible;
+  animation-name: CHANGESTART;
+  animation-duration: 4s;
+}
+
+.world{
+  width: 200px;
+  height: 70px;
+}
+
+.easy{
+  width: 200px;
+  height: 70px;
+  visibility: hidden;
+  position: relative;
+  left: 0;
+}
+.World-EASY .easy{
+  visibility: visible;
+}
+.normal{
+  width: 200px;
+  height: 70px;
+  visibility: hidden;
+  position: relative;
+  left: -200px;
+}
+.World-NORMAL .normal{
+  visibility: visible;
+}
+.hard{
+  width: 200px;
+  height: 70px;
+  visibility: hidden;
+  position: relative;
+  left: -400px;
+}
+.World-HARD .hard{
+  visibility: visible;
+}
+
+/* 小マリオ　スペース */
+.small-mario-space{
+  text-align: center;
+  height: 70px;
+}
+.calcu-open .small-mario-space{
+  visibility: visible;
+  animation-name: CHANGESTART;
+  animation-duration: 4s;
+}
+/* ×1 */
+.life{
+  position: relative;
+  bottom: 30px;
+}
+
+/***** マリオ *****/
+.space-mario{
+  width: 150px;
+  height: 200px;
+  /*位置設定*/
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%);
+  bottom: 158px;
+  visibility: hidden;
+  z-index: 6000;
+}
+/* マリオ img */
+.calcu-open .space-mario{
+  animation: marioLoop var(--base-time) linear infinite;
+  animation-delay: var(--base-delay);
+}
+@keyframes marioLoop{
+  0%{
+    bottom: 158px;
+  }
+  50%{
+    bottom: 310px;
+  }
+  100%{
+    bottom: 158px;
+  }
+}
+.AppButton .space-mario{
+  animation-play-state: paused;
+}
+
+/***** 走ってるマリオ *****/
+.mario-run1{
+  width: 150px;
+  height: auto;
+  position: absolute;
+  bottom: 0;
+  visibility: hidden;
+}
+.calcu-open .mario-run1{
+  visibility: hidden;
+}
+.AppButton .mario-run1{
+  visibility: visible;
+}
+
+/***** ジャンプマリオ *****/
+.mario-jump{
+  width: 100px;
+  height: auto;
+  position: absolute;
+  bottom: 0;
+  visibility: hidden;
+}
+.calcu-open .mario-jump{
+  visibility: visible;
+}
+.AppButton .mario-jump{
+  visibility: hidden;
+}
+
+
+/***** プレイ画面 *****/
+.window-play{
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  left: 50%;
+  transform: translate(-50%);
+  bottom: 0;
+  z-index: 10;
+  visibility: hidden;
+}
+.calcu-open .background{
+  visibility: visible;
+  animation: backgroundLoop var(--base-time) linear infinite;
+  animation-delay: var(--base-delay);
+}
+@keyframes backgroundLoop{
+  0%{
+    background-position: left 0 bottom 0;
+  }
+  100%{
+    background-position: left -100vw bottom 0;
+  }
+}
+.AppButton .background{
+  animation-play-state: paused;
+}
+
+/***** はてなボックス *****/
+.space-mario-box{
+  position: absolute;
+  visibility: hidden;
+  width: 80px;
+  height: 80px;
+  bottom: 463px;
+}
+.calcu-open .space-mario-box{
+  animation: boxLoop var(--base-time) linear infinite;
+  animation-delay: var(--base-delay);
+}
+@keyframes boxLoop{
+  0%{
+    visibility: visible;
+    right: -40px;
+  }
+  50%{
+    visibility: visible;
+    right: 50%;
+    margin-right: -40px;
+  }
+  100%{
+    visibility: visible;
+    right: 100%;
+    margin-right: -40px;
+  }
+}
+.AppButton .space-mario-box{
+  display: none;
+  animation-play-state: paused;
+}
+
+/* はてなボックス img */
+.mario-box{
+  position: absolute;
+  bottom: 0px;
+  visibility: hidden;
+}
+.calcu-open .mario-box{
+  animation-name: marioboxLoop;
+  animation-duration: var(--base-time);
+  animation-delay: var(--base-delay);
+  animation-iteration-count: infinite;
+}
+@keyframes marioboxLoop{
+  0%{
+    visibility: visible;
+  }
+  50%{
+    visibility: hidden;
+  }
+  100%{
+    visibility: hidden;
+  }
+}
+.AppButton .mario-box{
+  visibility: hidden;
+  animation-play-state: paused;
+}
+
+/* はてなボックス　空 */
+.AppButton .mario-box-emptiness{
+  visibility: hidden;
+}
+
+/* 草 */
+.grass{
+  position: absolute;
+  bottom: 157px;
+  visibility: hidden;
+}
+.countdown-close .grass{
+  visibility: visible;
+  animation: GRASS var(--base-time) linear infinite;
+  /*animation-delay: var(--base-delay);*/
+}
+@keyframes GRASS{
+  0%{
+    right: -75px;
+  }
+  50%{
+    right: 50%;
+    margin-right: -75px;
+  }
+  100%{
+    right: 100%;
+    margin-right: -75px;
+  }
+}
+.AppButton .grass{
+  animation-play-state: paused;
+}
+
+/* 雲1 */
+.cloud1{
+  position: absolute;
+  bottom: 600px;
+  visibility: hidden;
+}
+.countdown-close .cloud1{
+  animation: CLOUD1 var(--base-time) linear infinite;
+  animation-delay: 1s;
+}
+@keyframes CLOUD1{
+  0%{
+    visibility: visible;
+    right: -100px;
+  }
+  50%{
+    visibility: visible;
+    right: 50%;
+    margin-right: -100px;
+  }
+  100%{
+    visibility: visible;
+    right: 100%;
+    margin-right: -100px;
+  }
+}
+.AppButton .cloud1{
+  animation-play-state: paused;
+}
+.cloud1 img{
+  width: 200px;
+  height: auto;
+}
+
+/* 雲2 */
+.cloud2{
+  position: absolute;
+  bottom: 680px;
+  visibility: hidden;
+}
+.countdown-close .cloud2{
+  visibility: hidden;
+  animation: CLOUD2 var(--base-time) linear infinite;
+  animation-delay: 0.8s;
+}
+@keyframes CLOUD2{
+  0%{
+    visibility: visible;
+    right: -170px;
+  }
+  50%{
+    visibility: visible;
+    right: 50%;
+    margin-right: -170px;
+  }
+  100%{
+    visibility: visible;
+    right: 100%;
+    margin-right: -170px;
+  }
+}
+.AppButton .cloud2{
+  animation-play-state: paused;
+}
+.cloud1 img{
+  width: 200px;
+  height: auto;
+}
+
+/* 3連ブロック */
+.brick3{
+  position: absolute;
+  bottom: 463px;
+  visibility: hidden;
+}
+.countdown-close .brick3{
+  animation: BRICK3 var(--base-time) linear infinite;
+  animation-delay: 0s;
+}
+@keyframes BRICK3{
+  0%{
+    visibility: visible;
+    right: -120px;
+  }
+  50%{
+    visibility: visible;
+    right: 50%;
+    margin-right: -120px;
+  }
+  100%{
+    visibility: visible;
+    right: 100%;
+    margin-right: -120px;
+  }
+}
+.AppButton .brick3{
+  animation-play-state: paused;
+}
+
+/* 階段 */
+.stair{
+  position: absolute;
+  bottom: 157px;
+  right: 70%;
+  visibility: hidden;
+}
+.calcu-open .stair{
+  animation: STAIR var(--base-time) linear;
+  animation-delay: calc(var(--base-delay)*0.8);
+  
+}
+@keyframes STAIR{
+  0%{
+    right: 70%;　
+    margin-right: -120px;
+  }
+  70%{
+    right: 70%;
+    margin-right: -120px;
+  }
+  100%{
+    right: 100%;
+    margin-right: -120px;
+  }
+}
+.AppButton .stair{
+  animation-play-state: paused;
+}
+
+/***** 問題用スペース *****/
+/* 外枠 */
+.global-window {
+  position: absolute;
+  width: 110px;
+  height: 110px;
+  bottom: 544px;
+}
+.calcu-open .global-window {
+  animation: calcu-Loop var(--base-time) linear infinite;
+  animation-delay: var(--base-delay);
+}
+@keyframes calcu-Loop{
+  0%{
+    right: -110px;
+    bottom: 544px;
+  }
+  50%{
+    right: 50%;
+    margin-right: -55px;
+    bottom: 544px;
+  }
+  100%{
+    right: 100%;
+    margin-right: -55px;
+    bottom: 544px;
+  }
+}
+.AppButton .global-window{
+  display: none;
+  animation-play-state: paused;
+}
+/* 内枠 */
+.Calcu-window {
+  width: 100%;
+  height: 100%;
+  border-radius: 30px;
+  font-size: 140px;
+  font-weight: 180px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgb(0, 0, 0、0);
+  color: #fff;
+  font-family: arial;
+  z-index: 600;
+  visibility: ;
+}
+.calcu-open .Calcu-window{
+  animation-name: calcuBoxLoop;
+  animation-duration: var(--base-time);
+  animation-delay: var(--base-delay);
+  animation-iteration-count: infinite;
+}
+@keyframes calcuBoxLoop{
+  0%{
+    visibility: hidden;
+  }
+  49%{
+    visibility: hidden;
+  }
+  50%{
+    visibility: visible;  
+  }
+  100%{
+    visibility: visible;
+  }
+}
+.AppButton .Calcu-window{
+  animation-play-state: paused;
+}
+
+/***** カウントアップ *****/
+.loop{
+  position: absolute;
+  width: 100px;
+  height: 50px;
+  right: 20px;
+  bottom: 180px;
+  background-color: azure;
+  border-radius: 10px;
+  transition: 0.5s linear;
+  visibility: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.calcu-open .loop{
+  visibility: visible;
+  animation: fadeIn 2s ease 0s 1 normal;
+  -webkit-animation: fadeIn 2s ease 0s 1 normal;
+}
+.AppButton .loop{
+  visibility: hidden;
+}
+/* 装飾用 */
+@keyframes fadeIn {
+  0% {opacity: 0}
+  30%{opacity: 0}
+  100% {opacity: 1}
+}
+@-webkit-keyframes fadeIn {
+  0% {opacity: 0}
+  30%{opacity: 0}
+  100% {opacity: 1}
+}
+
+/***** 答え合わせ用テキストボックス *****/
+.answer-box{
+  position: absolute;
+  width: 500px;
+  height: 300px;
+  top: 10%;
+  left: 50%;
+  transform: translate(-50%);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+}
+.answer-box img{
+  visibility: hidden;
+  width: 500px;
+  height: 300px;
+}
+.AppButton .answer-box img{
+  visibility: visible;
+}
+.open-end .answer-box img{
+  visibility: hidden;
+}
+.textBox{
+  width: 420px;
+  height: 220px;
+  position: absolute;
+  border: 1px solid rgb(165, 87, 30);
+  top: 40px;
+  font-size: 200px;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  visibility: hidden;
+  text-align: center;
+  background-color: rgb(165, 87, 30);
+}
+.textBox::placeholder{
+  font-size: 38px;
+  position: relative;
+  bottom: 60px;
+  color: #fff;
+  font-family: arial;
+}
+.AppButton .textBox{
+  visibility: visible;
+}
+.open-end .textBox{
+  visibility: hidden;
+}
+
+/***** 時間制限 *****/
+.Timer{
+  position: absolute;
+  width:300px;
+  height: 100px;
+  right: 20px;
+  bottom: 500px;
+  background-color: azure;
+  border-radius: 10px;
+  font-size: 50px;
+  font-family: arial;
+  transition: 0.5s linear;
+  visibility: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  visibility: hidden;
+}
+.AppButton .Timer{
+  visibility: visible;
+}
+
+/***** エンディング画面 *****/
+.window-end{
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  background-image: url(images/end-background.PNG);
+  visibility: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 5000;
+}
+.open-end .window-end{
+  visibility: visible;
+  animation-name: animationEnd;
+  animation-duration: 2s;
+}
+@keyframes animationEnd{
+  0%{
+    top: -100vh;
+  }
+  100%{
+    top: 0px;
+  }
+}
+/* [Great] or [GAME OVER] */
+.message{
+  position: absolute;
+  top: 5%;
+  width: 740px;
+  height: 150px;
+  visibility: hidden;
+  z-index: 6100;
+}
+.open-end .message{
+  visibility: visible;
+  opacity: 0;
+  animation-name: animationMessage;
+  animation-delay: 4s;
+  animation-duration: 3s;
+  animation-fill-mode: forwards;
+}
+@keyframes animationMessage{
+  0%{opacity: 0;}
+  100%{opacity: 1;}
+}
+
+/* 正解 */
+.GREATpic{
+  position: absolute;
+  visibility: hidden;
+  left: 100px;
+}
+.open-ok .GREATpic{
+  visibility: visible;
+}
+
+/* 不正解 */
+.BADpic{
+  position: absolute;
+  visibility: hidden;
+}
+.open-bad .BADpic{
+  visibility: visible;
+}
+
+/* 模範回答表示 */
+.output-space{
+  width: 350px;
+  height: 220px;
+  position: absolute;
+  top: 25%;
+  visibility: hidden;
+}
+.open-bad .output-space{
+  visibility: visible;
+  opacity: 0;
+  animation-name: animationOutput;
+  animation-delay: 5s;
+  animation-duration: 3s;
+  animation-fill-mode: forwards;
+}
+@keyframes animationOutput{
+  0%{opacity: 0;}
+  100%{opacity: 1;}
+}
+.output{
+  position: absolute;
+  width: 300px;
+  height: 160px;
+  bottom: 30px;
+  left: 30px;
+  color: #fff;
+  text-align: center;
+  font-size: 150px;
+  font-family: arial;
+  font-weight: 200px;
+  background-color: rgb(165, 87, 31);
+}
+
+/****** もう一度 *****/
+.link-top{
+  position: fixed;
+  bottom: 30px;
+  width: 100px;
+  height: 40px;
+  left: 50%;
+  transform: translate(-50%);
+  color: #fff;
+  font-family: arial;
+  font-size: 15px;
+  border: 1px solid #000;
+  border-bottom: 3px solid #000;
+  border-radius: 20px;
+  background-color: rgb(165, 87, 30);
+  visibility: ;
+  z-index: 5000;
+}
+.open-end .link-top{
+  visibility: visible;
+}
+
+/*** credit ***/
+.credit{
+  position: fixed;
+  width: 100px;
+  height: 20px;
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  font-family: arial;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #fff;
+  font-size: 10px;
+  z-index: 5000;
+}
+.under-credit{
+  position: fixed;
+  width: 10px;
+  height: 2px;
+  position: absolute;
+  bottom: 10px;
+  right: 15px;
+  z-index: 10;
+  border-radius: 10px;
+}
+/**************/
+
+/***** height 670以下で切り替え *****/
+@media(max-height: 670px){
+  /* 背景 */
+  .background{
+    background-position: center bottom -80px;
+  }
+  
+  /***** プレイ画面 *****/
+  .window-play{
+    bottom: -80px;
+  }
+  @keyframes backgroundLoop{
+    0%{
+      background-position: left 0 bottom -80px;
+    }
+    100%{
+      background-position: left -100vw bottom -80px;
+    }
+  }
+  
+  /***** マリオ *****/
+  .space-mario{
+    bottom: 78px;
+  }
+  @keyframes marioLoop{
+    0%{
+      bottom: 78px;
+    }
+    50%{
+      bottom: 180px;
+    }
+    100%{
+      bottom: 78px;
+    }
+  }
+  
+  /***** 答え合わせ用テキストボックス *****/
+  .answer-box{
+    position: absolute;
+    width: 500px;
+    height: 300px;
+    top: -10%;
+    left: 50%;
+    transform: translate(-50%);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+  }
+
+}
